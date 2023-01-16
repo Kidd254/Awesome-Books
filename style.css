@@ -1,0 +1,32 @@
+* {
+    padding-left: 0;
+    margin-left: 0;
+}
+.section1 {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+}
+
+.heading-container {
+    order: 0;
+}
+
+#books {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    list-style: none;
+    height: 10vh;
+}
+#books article {
+    padding: 1% 0;
+}
+
+.form-container {
+    order: 2;
+    padding-top: 2%;
+}

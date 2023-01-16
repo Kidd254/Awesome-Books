@@ -5,31 +5,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lawrence's Awesome Books</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Lawrence's Awesome Books App</title>
+    <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
-    <section>
-        <h1>Awesome books</h1>
-        <div>
-            <article>First book</article>
-            <article>dagag ahaha</article>
-            <button>Remove</button>
+    <section class="section1">
+        <div class="heading-container">
+            <h1>Awesome books</h1>
         </div>
-        <hr>
-        <div>
-            <article>Second Book</article>
-            <article>mamam jajaj</article>
-            <button>Remove</button>
+        <div id="books">
+            <div>
+                <article>John Ruganda</article>
+                <article> Shreds of tenderness</article>
+                <form>
+                    <input type="submit" value="Remove" class="remove">
+                </form>
+            </div>
         </div>
-        <hr>
-        <label for=""><input type="text" placeholder="Title"></label> <br> <br>
-        <label for=""><input type="text" placeholder="Author"></label> <br> <br>
-        <button> Add</button>
+
+        <form class="form-container">
+            <label for="title"><input type="text" class="title" id="book-title"></label>
+            <br> <br>
+            <label for="author"><input type="text" class="author" id="book-author"></label> <br> <br>
+            <input type="submit" value="Add Book" class="add" id="add-book">
+        </form>
 
     </section>
-    <script href="script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
