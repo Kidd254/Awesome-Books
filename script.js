@@ -1,24 +1,73 @@
-/* eslint-disable no-alert */
-const titleInput = document.querySelector('#book-title');
-const authorInput = document.querySelector('#book-author');
-const addInput = document.querySelector('#add-book');
-const bookList = document.querySelector('#books');
+/* eslint-disable max-len */
+const dynamicCard = document.querySelector('.dynamic');
+const addBtn = document.querySelector('#btn');
+const titleInput = document.querySelector('.title');
+const authorInput = document.querySelector('.author');
 
-addInput.addEventListener('click', () => {
-  if (titleInput.value === '' && authorInput.value === '') {
-    alert('Enter any input!');
-  } else {
-    const bookListRow = document.createElement('div');
-    const newTitle = document.createElement('article');
-    newTitle.innerHTML = titleInput.value;
-    bookListRow.appendChild(newTitle);
-    const newAuthor = document.createElement('article');
-    newAuthor.innerHTML = authorInput.value;
-    bookListRow.appendChild(newAuthor);
-    const removeInput = document.createElement('input');
-    removeInput.value = 'remove';
-    bookListRow.appendChild(removeInput);
+const listOfBooks = [{
+  title: 'Shreds of Tenderness',
+  author: 'John Ruganda',
 
-    bookList.appendChild(bookListRow);
+},
+{
+  title: 'Rich Dad Poor Dad',
+  author: 'Robert Kiosaki',
+},
+];
+
+function addBooks(title, author) {
+  const tempBooks = {
+    title,
+    author,
+  };
+
+  listOfBooks.push(tempBooks);
+  const addedBooks = document.querySelector('.new-books');
+  const childEl = document.createElement('article');
+  const grandChild = document.createElement('p');
+  grandChild.innerText = tempBooks.title;
+  childEl.appendChild(grandChild);
+  const grandChild2 = document.createElement('p');
+  grandChild2.innerText = tempBooks.author;
+  childEl.appendChild(grandChild2);
+  const removeBtn = document.createElement('button');
+  removeBtn.innerText = 'Remove';
+  removeBtn.addEventListener('click', () => {
+    childEl.style.display = 'none';
+  });
+  childEl.appendChild(removeBtn);
+  const line = document.createElement('hr');
+  childEl.appendChild(line);
+  addedBooks.appendChild(childEl);
+}
+
+function removeBook(index) {
+  listOfBooks.splice(listOfBooks.findIndex((e) => e.title === listOfBooks[index].title && e.author === listOfBooks[index].title), 1);
+}
+
+function bookLoader() {
+  for (let i = 0; i < listOfBooks; i += 1) {
+    const dynamicCardChild = document.createElement('article');
+    const dynamicCardGrand = document.createElement('p');
+    dynamicCardGrand.innerText = listOfBooks[i].title;
+    dynamicCardChild.append(dynamicCardGrand);
+    const dynamicCardGrand2 = document.createElement('p');
+    dynamicCardGrand2.innerText = listOfBooks[i].author;
+    dynamicCardChild.append(dynamicCardGrand2);
+    const remove = document.createElement('button');
+    remove.innerText = 'Remove';
+    remove.addEventListener('click', () => {
+      removeBook(i);
+    });
+    dynamicCardChild.appendChild(remove);
+    const underline = document.createElement('hr');
+    dynamicCardChild.appendChild(underline);
+    dynamicCard.appendChild(dynamicCardChild);
   }
+}
+
+addBtn.addEventListener('click', () => {
+  addBooks(titleInput.Value, authorInput.value);
 });
+
+bookLoader();

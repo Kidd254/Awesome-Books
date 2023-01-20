@@ -10,28 +10,17 @@
 </head>
 
 <body>
-    <section class="section1">
-        <div class="heading-container">
-            <h1>Awesome books</h1>
-        </div>
-        <div id="books">
-            <div>
-                <article>John Ruganda</article>
-                <article> Shreds of tenderness</article>
-                <form>
-                    <input type="submit" value="Remove" class="remove">
-                </form>
+    <div class="main-container">
+        <h1 class="book-list">Awesome books</h1>
+        <section class="dynamic"></section>
+        <section class="add-books">
+            <div class="newbooks">
+                <input type="text" placeholder="Title" id="title" name="title" /><br /><br />
+                <input type="text" placeholder=" Author" id="author" name="author" /><br /><br />
+                <button type="button" name="btn" id="btn">Add</button>
             </div>
-        </div>
-
-        <form class="form-container">
-            <label for="title"><input type="text" class="title" id="book-title"></label>
-            <br> <br>
-            <label for="author"><input type="text" class="author" id="book-author"></label> <br> <br>
-            <input type="submit" value="Add Book" class="add" id="add-book">
-        </form>
-
-    </section>
+        </section>
+    </div>
     <script src="script.js"></script>
 </body>
 
