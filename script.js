@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 const dynamicCard = document.querySelector('.dynamic');
 const addBtn = document.querySelector('#btn');
-const titleInput = document.querySelector('.title');
-const authorInput = document.querySelector('.author');
+const titleInput = document.querySelector('#title');
+const authorInput = document.querySelector('#author');
 
 const listOfBooks = [{
   title: 'Shreds of Tenderness',
@@ -22,7 +22,7 @@ function addBooks(title, author) {
   };
 
   listOfBooks.push(tempBooks);
-  const addedBooks = document.querySelector('.new-books');
+  const addedBooks = document.querySelector('.newbooks');
   const childEl = document.createElement('article');
   const grandChild = document.createElement('p');
   grandChild.innerText = tempBooks.title;
@@ -42,11 +42,11 @@ function addBooks(title, author) {
 }
 
 function removeBook(index) {
-  listOfBooks.splice(listOfBooks.findIndex((e) => e.title === listOfBooks[index].title && e.author === listOfBooks[index].title), 1);
+  listOfBooks.splice(listOfBooks.findIndex((e) => e.title === listOfBooks[index].title && e.author === listOfBooks[index].author), 1);
 }
 
 function bookLoader() {
-  for (let i = 0; i < listOfBooks; i += 1) {
+  for (let i = 0; i < listOfBooks.length; i += 1) {
     const dynamicCardChild = document.createElement('article');
     const dynamicCardGrand = document.createElement('p');
     dynamicCardGrand.innerText = listOfBooks[i].title;
@@ -58,6 +58,7 @@ function bookLoader() {
     remove.innerText = 'Remove';
     remove.addEventListener('click', () => {
       removeBook(i);
+      dynamicCardChild.style.display = 'none';
     });
     dynamicCardChild.appendChild(remove);
     const underline = document.createElement('hr');
@@ -67,7 +68,55 @@ function bookLoader() {
 }
 
 addBtn.addEventListener('click', () => {
-  addBooks(titleInput.Value, authorInput.value);
+  addBooks(titleInput.value, authorInput.value);
 });
+
+let storedData = {
+  title: '',
+  author: '',
+};
+
+window.onload = () => {
+  if (titleInput && authorInput) {
+    const objectForm = localStorage.getItem('storedData');
+    if (objectForm) {
+      storedData = JSON.parse(objectForm);
+      titleInput.value = storedData.title;
+      authorInput.value = storedData.author;
+    }
+  }
+
+  titleInput.addEventListener('change', () => {
+    storedData.title = titleInput.value;
+    localStorage.setItem('storedData', JSON.stringify(storedData));
+  });
+
+  authorInput.addEventListener('change', () => {
+    storedData.author = authorInput.value;
+    localStorage.setItem('storedData', JSON.stringify(storedData));
+  });
+};
+
+/* let storedData = {
+  title: '',
+  author: '',
+};
+
+storedData = JSON.parse(localStorage.getItem('text'));
+titleInput.addEventListener('click', () => {
+  storedData.title = titleInput.value;
+  localStorage.setItem('input', JSON.stringify(storedData));
+});
+
+authorInput.addEventListener('click', () => {
+  storedData.author = authorInput.value;
+  localStorage.setItem('input', JSON.stringify(storedData));
+});
+if (localStorage.getItem('input')) {
+  let objectForm = localStorage.getItem('input');
+  objectForm = JSON.parse(objectForm);
+  document.getElementById('title').value = objectForm.title;
+  document.getElementById('author').value = objectForm.author;
+} */
 
 bookLoader();
